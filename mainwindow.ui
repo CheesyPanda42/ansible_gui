@@ -25,7 +25,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="1" column="3">
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="btn_load_playbook">
        <property name="text">
         <string>Load Playbook</string>
        </property>
@@ -48,7 +48,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btn_load_inventory">
        <property name="text">
         <string>Load Inventory</string>
        </property>
@@ -234,5 +234,42 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btn_load_inventory</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_inventory_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>789</x>
+     <y>63</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>682</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_load_playbook</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_playbook_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>789</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>680</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>load_inventory_clicked()</slot>
+  <slot>load_playbook_clicked()</slot>
+ </slots>
 </ui>
