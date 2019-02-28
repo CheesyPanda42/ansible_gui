@@ -26,12 +26,14 @@ class MainWindow(QMainWindow):
 
     def insertItemsIntoTree(self, item, tree):
         for i in item:
-            print(item[i])
+            print(i)
             subitem = QTreeWidgetItem(tree)
             subitem.setText(0, i)
-            tree = subitem
             if type(item[i]) == dict:
-                self.insertItemsIntoTree(item[i], tree)
+                print(item[i])
+                self.insertItemsIntoTree(item[i], subitem)
+            # else:
+            #     self.insertItemsIntoTree(item[i], tree)
         return
 
     def insertItemIntoTreeTopLevel(self, value, tree):
