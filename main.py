@@ -1,5 +1,5 @@
 import sys, os, pathlib
- 
+import configparser
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide2.QtCore import QFile, Slot
@@ -15,17 +15,21 @@ class MainWindow(QMainWindow):
     @Slot()
     def load_playbook_clicked(self):
         print("load_playbook_clicked")
-        self.get_file()
+        filename = self.get_file("txtInventoryFile")
+        self.txt_playbook_file.setText(filename)
 
     @Slot()
     def load_inventory_clicked(self):
         print("load_inventory_clicked")
-        self.get_file()
+        filename = self.get_file("txtPlaybookFile")
+        self.txt_inventory_file.setText(filename)
 
-    def get_file(self):
+    def get_file(self, caller):
         homedir = pathlib.Path.home()
+        print(caller)
         filename = QFileDialog.getOpenFileName(self, "Select Ansible file", str(homedir), "Ansible files (*.yml)")
         print(filename)
+        return filename[0]
 
 if __name__ == "__main__":
 
