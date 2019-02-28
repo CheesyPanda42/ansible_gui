@@ -1,7 +1,7 @@
 import sys, os, pathlib
 import configparser
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QTreeWidget, QTreeWidgetItem
 from PySide2.QtCore import QFile, Slot
 from uiloader import loadUi
 import yaml
@@ -21,7 +21,43 @@ class MainWindow(QMainWindow):
         return filename[0]
 
     def load_yml_file(self, filepath):
-        return yaml.load(open(filename, 'r'))
+        return yaml.load(open(filepath, 'r'))
+
+
+    def insertItemsIntoTree(self, item, tree):
+        for i in item:
+            print(item[i])
+            if type(item[i]) == dict:
+                self.insertItemsIntoTree(item[i], tree)
+        return
+
+    def insertItemIntoTreeTopLevel(self, value, tree):
+        item = QTreeWidgetItem(tree)
+        item.setText(0, value)
+        tree.insertTopLevelItem(0, item)
+        return item
+
+    def populateTree(self, treeData):
+        items = []
+        tree = self.tree_playbook_breakdown
+        print(treeData)
+        for key in list(treeData.keys()):
+            subtree = self.insertItemIntoTreeTopLevel(key, tree)
+            self.insertItemsIntoTree(treeData[key], subtree)
+
+
+
+
+
+        # QTreeWidgetItem()
+        # for i in range(10):
+        #     items.append(QTreeWidgetItem(tree, str(i)))
+        #     sub_item = []
+        #     for j in range(10):
+        #         sub_item.append(QTreeWidgetItem(items[i], str(j)))
+        #
+        #self.tree_playbook_breakdown.insertTopLevelItems(0, items)
+
 
 ################################################
 # Slots
@@ -31,6 +67,8 @@ class MainWindow(QMainWindow):
         print("load_inventory_clicked")
         filename = self.get_file(self._options['ansible_default_paths']['inventory'])
         self.txt_inventory_file.setText(filename)
+        inventory_data = self.load_yml_file(filename)
+        self.populateTree(inventory_data)
 
     @Slot()
     def load_playbook_clicked(self):
