@@ -14,32 +14,37 @@ class MainWindow(QMainWindow):
         self._options = options
         QMainWindow.__init__(self, parent)
         loadUi('mainwindow.ui', self)
-
-    @Slot()
-    def load_playbook_clicked(self):
-        print(self._options)
-        print("load_playbook_clicked")
-        filename = self.get_file("txtInventoryFile")
-        self.txt_playbook_file.setText(filename)
-
-    @Slot()
-    def load_inventory_clicked(self):
-        print("load_inventory_clicked")
-        filename = self.get_file("txtPlaybookFile")
-        self.txt_inventory_file.setText(filename)
-
-    def get_file(self, caller):
-        homedir = pathlib.Path.home()
-        print(caller)
-        filename = QFileDialog.getOpenFileName(self, "Select Ansible file", str(homedir), "Ansible files (*.yml)")
+    
+    def get_file(self, defaultPath):
+        filename = QFileDialog.getOpenFileName(self, "Select Ansible file", str(pathlib.Path(defaultPath).resolve()), "Ansible files (*.yml)")
         print(filename)
         return filename[0]
 
+    def load_yml_file(self, filepath):
+        return yaml.load(open(filename, 'r'))
+
+################################################
+# Slots
+################################################
+    @Slot()
+    def load_inventory_clicked(self):
+        print("load_inventory_clicked")
+        filename = self.get_file(self._options['ansible_default_paths']['inventory'])
+        self.txt_inventory_file.setText(filename)
+
+    @Slot()
+    def load_playbook_clicked(self):
+        print("load_playbook_clicked")
+        filename = self.get_file(self._options['ansible_default_paths']['playbook'])
+        self.txt_playbook_file.setText(filename)
+
+    
+############################################################################################################
+############################################################################################################
+
 def loadConfig(configfile):
     config = yaml.load(open(configfile, 'r'))
-    print(config)
-    return
-
+    return config
 
 
 if __name__ == "__main__":
@@ -49,10 +54,9 @@ if __name__ == "__main__":
     else:
         configFilePath = pathlib.Path('./config.yml').resolve()
 
-    loadConfig(configFilePath)
-
+    config = loadConfig(configFilePath)
 
     app = QApplication(sys.argv)
-    window = MainWindow(options=configFilePath)
+    window = MainWindow(options=config)
     window.show()
     sys.exit(app.exec_())

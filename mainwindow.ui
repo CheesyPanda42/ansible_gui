@@ -24,17 +24,38 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="3">
-      <widget class="QPushButton" name="btn_load_playbook">
-       <property name="text">
-        <string>Load Playbook</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="2">
       <widget class="QLineEdit" name="txt_playbook_file">
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Playbook</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="inventoryLabel">
+       <property name="text">
+        <string>Inventory</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="btn_load_inventory">
+       <property name="text">
+        <string>Select Inventory</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="btn_load_playbook">
+       <property name="text">
+        <string>Select Playbook</string>
        </property>
       </widget>
      </item>
@@ -54,27 +75,6 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="btn_load_inventory">
-       <property name="text">
-        <string>Load Inventory</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Playbook</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="inventoryLabel">
-       <property name="text">
-        <string>Inventory</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_2">
@@ -87,18 +87,8 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="2" column="1" colspan="2">
-      <widget class="QTextEdit" name="textEdit_3"/>
-     </item>
      <item row="3" column="1">
       <widget class="QPushButton" name="pushButton_4">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QPushButton" name="pushButton_3">
        <property name="text">
         <string>PushButton</string>
        </property>
@@ -107,17 +97,27 @@
      <item row="1" column="1" colspan="2">
       <widget class="QTextEdit" name="textEdit_2"/>
      </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QTextEdit" name="textEdit_3"/>
+     </item>
      <item row="0" column="1" colspan="2">
       <widget class="QTextEdit" name="textEdit"/>
      </item>
-     <item row="0" column="0" rowspan="3">
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>1</number>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>PushButton</string>
        </property>
-       <widget class="QWidget" name="tab">
+      </widget>
+     </item>
+     <item row="0" column="0" rowspan="3">
+      <widget class="QTabWidget" name="tab_variable_viewer">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tb_inventory">
         <attribute name="title">
-         <string>Tab 1</string>
+         <string>Inventory</string>
         </attribute>
         <widget class="QScrollArea" name="scrollArea">
          <property name="geometry">
@@ -140,18 +140,31 @@
             <height>409</height>
            </rect>
           </property>
-          <widget class="QTableView" name="tableView">
+          <widget class="QTableWidget" name="tbl_inventory_vars">
            <property name="geometry">
             <rect>
-             <x>0</x>
-             <y>-10</y>
-             <width>491</width>
-             <height>421</height>
+             <x>5</x>
+             <y>1</y>
+             <width>481</width>
+             <height>411</height>
             </rect>
            </property>
            <property name="sortingEnabled">
             <bool>true</bool>
            </property>
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <column>
+            <property name="text">
+             <string>Key</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </column>
           </widget>
          </widget>
         </widget>
@@ -170,58 +183,12 @@
         </widget>
        </widget>
        <widget class="QWidget" name="tab_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <attribute name="title">
          <string>Tab 2</string>
         </attribute>
-        <widget class="QScrollArea" name="scrollArea_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>491</width>
-           <height>411</height>
-          </rect>
-         </property>
-         <property name="widgetResizable">
-          <bool>true</bool>
-         </property>
-         <widget class="QWidget" name="scrollAreaWidgetContents_2">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>489</width>
-            <height>409</height>
-           </rect>
-          </property>
-          <widget class="QTableView" name="tableView_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>-10</y>
-             <width>491</width>
-             <height>421</height>
-            </rect>
-           </property>
-           <property name="sortingEnabled">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </widget>
-        </widget>
-        <widget class="QScrollBar" name="verticalScrollBar_3">
-         <property name="geometry">
-          <rect>
-           <x>490</x>
-           <y>0</y>
-           <width>21</width>
-           <height>411</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
        </widget>
       </widget>
      </item>
