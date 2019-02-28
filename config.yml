@@ -1,0 +1,4 @@
+ansible_default_paths:
+  inventory: /home/prelersc/workspace/wolfden/ansible_environments
+  playbook: /home/prelersc/workspace/wolfden/ansible_playbooks
+  config: /home/prelersc/workspace/wolfden/ansible.cfg
