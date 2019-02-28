@@ -32,10 +32,10 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="txtPlaybookFile"/>
      </item>
      <item row="0" column="2">
-      <widget class="QLineEdit" name="inventoryLineEdit">
+      <widget class="QLineEdit" name="txtInventoryFile">
        <property name="enabled">
         <bool>true</bool>
        </property>
