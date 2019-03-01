@@ -81,6 +81,14 @@ class MainWindow(QMainWindow):
         filename = self.get_file(self._options['ansible_default_paths']['playbook'])
         self.txt_playbook_file.setText(filename)
 
+    @Slot()
+    def tree_playbook_item_double_clicked(self):
+        selected_item = self.tree_playbook_breakdown.selectedItems()[0]
+        item = selected_item
+        while item.parent():
+            print(item.parent().text(0))
+            item = item.parent()
+
     
 ############################################################################################################
 ############################################################################################################
@@ -101,5 +109,6 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     window = MainWindow(options=config)
+    #window.populateTree(config)
     window.show()
     sys.exit(app.exec_())
